@@ -12,12 +12,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
-import android.media.*;
-import android.widget.SeekBar;
 import android.widget.TextView;
-
 import java.util.Random;
 
 public class MainActivity extends FragmentActivity implements
@@ -31,6 +27,8 @@ public class MainActivity extends FragmentActivity implements
 
     private Boolean awaitingClick = false;
     private ReactionTimer reactionTimer = new ReactionTimer();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
