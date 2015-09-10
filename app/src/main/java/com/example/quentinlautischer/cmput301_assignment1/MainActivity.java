@@ -7,9 +7,18 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
+import android.media.*;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -19,6 +28,9 @@ public class MainActivity extends FragmentActivity implements
     private ActionBar actionBar;
     // Tab titles
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
+
+    private Boolean awaitingClick = false;
+    private ReactionTimer reactionTimer = new ReactionTimer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,5 +88,45 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
     }
+
+    public void ReactionTimerClick(View rootView) {
+
+        if (!awaitingClick){
+            //Start and wait for Reaction
+            findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
+            findViewById(R.id.reactionTimerTextView).setVisibility(View.INVISIBLE);
+            findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
+
+            Random r = new Random();
+            int alertDelayTime = r.nextInt(2000) + 200;
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    findViewById(R.id.reactionTimerAlert).setVisibility(View.VISIBLE);
+                    findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#CC0000"));
+                    awaitingClick = true;
+                    reactionTimer.start();
+                }
+            }, alertDelayTime);
+        } else {
+            //Reaction
+            long time = reactionTimer.stop();
+            awaitingClick = false;
+
+            final TextView mTextView = (TextView) findViewById(R.id.reactionTimerTextView);
+            mTextView.setText("Tap to begin again \n Your time was: ");
+            mTextView.append(String.valueOf(time) + "ms");
+
+            findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
+            findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
+            findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
+
+
+        }
+
+    }
+
 
 }

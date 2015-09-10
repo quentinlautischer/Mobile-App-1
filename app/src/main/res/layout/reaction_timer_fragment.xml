@@ -3,23 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#5edf74">
+    android:background="#5edf74"
+    android:id="@+id/reactionTimerRoot"
+    android:onClick="ReactionTimerClick"
+    >
 
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="After Pressing Begin \n Touch When The Screen Turns Red"
+        android:text="Tap to begin \n Tap Again Once The Screen Turns Red"
         android:textSize="20dp"
         android:layout_centerInParent="true"
-        android:id="@+id/textView" />
+        android:id="@+id/reactionTimerTextView" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Begin"
-        android:id="@+id/beginButton"
-        android:layout_marginTop="71dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="CLICK"
+        android:id="@+id/reactionTimerAlert"
+        android:layout_below="@+id/reactionTimerTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:visibility="invisible"
+        />
+
 
 </RelativeLayout>
