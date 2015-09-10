@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/quentinlautischer/Development/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-3da9311f1942ecdd0ceff0084bb2e0774f7244f0.jar" />
+    </item>
+    <item
+        jar="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-2ebb7b8a0b091a1b333be0cfdfdaed3174ee56e9.jar" />
+    </item>
+    <item
+        jar="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/pre-dexed/debug/classes-9d712bfe5068952c6ec9f9ae93b11a98d2585b2b.jar" />
+    </item>
+
+</items>
