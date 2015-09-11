@@ -26,11 +26,6 @@ public class MainActivity extends FragmentActivity implements
     // Tab titles
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
 
-    private Boolean awaitingClick = false;
-    private ReactionTimer reactionTimer = new ReactionTimer();
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,48 +82,5 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
     }
-
-    public void ReactionTimerClick(View rootView) {
-
-        if (!awaitingClick){
-            //Start and wait for Reaction
-            findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
-            findViewById(R.id.reactionTimerTextView).setVisibility(View.INVISIBLE);
-            findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
-
-            Random r = new Random();
-            int alertDelayTime = r.nextInt(2000) + 200;
-
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    findViewById(R.id.reactionTimerAlert).setVisibility(View.VISIBLE);
-                    findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#CC0000"));
-                    awaitingClick = true;
-                    reactionTimer.start();
-                }
-            }, alertDelayTime);
-        } else {
-            //Reaction
-            long time = reactionTimer.stop();
-            awaitingClick = false;
-
-            final TextView mTextView = (TextView) findViewById(R.id.reactionTimerTextView);
-            mTextView.setText("Tap to begin again \n Your time was: ");
-            mTextView.append(String.valueOf(time) + "ms");
-
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.statFragRoot);
-//            fragment.addStat(R.string.reactMinTime10, R.id.reactMinTime10, (int) time);
-
-            findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
-            findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
-            findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
-
-
-        }
-
-    }
-
 
 }

@@ -17,8 +17,6 @@ public class StatsFragment extends Fragment {
     public SharedPreferences sharedPref;
     public SharedPreferences.Editor editor;
 
-    public View _rootView;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -26,10 +24,8 @@ public class StatsFragment extends Fragment {
 
         sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
 
-//        initStats();
-//        addStat(R.string.reactMinTime10, R.id.reactMinTime10, (int) 333);
+        initStats(rootView);
 
-        _rootView = rootView;
         return rootView;
     }
 
@@ -43,10 +39,10 @@ public class StatsFragment extends Fragment {
     }
 
 
-    private void initStats() {
+    private void initStats(View rootView) {
         long value = sharedPref.getInt(getString(R.string.reactMinTime10), 0);
-//        TextView mTextView = (TextView) _rootView.findViewById(R.id.reactMinTime10);
-//        mTextView.setText(String.valueOf(value));
+        TextView mTextView = (TextView) rootView.findViewById(R.id.reactMinTime10);
+        mTextView.setText(String.valueOf(value));
     }
 
 
