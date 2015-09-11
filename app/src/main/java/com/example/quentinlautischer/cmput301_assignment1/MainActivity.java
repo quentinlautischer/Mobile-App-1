@@ -10,6 +10,7 @@ import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -116,6 +117,9 @@ public class MainActivity extends FragmentActivity implements
             final TextView mTextView = (TextView) findViewById(R.id.reactionTimerTextView);
             mTextView.setText("Tap to begin again \n Your time was: ");
             mTextView.append(String.valueOf(time) + "ms");
+
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.statFragRoot);
+//            fragment.addStat(R.string.reactMinTime10, R.id.reactMinTime10, (int) time);
 
             findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
             findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);

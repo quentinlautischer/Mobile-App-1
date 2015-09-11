@@ -3,14 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#6da4df">
+    android:background="#6da4df"
+    android:id="@+id/statFragRoot">
 
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Stats Screen"
         android:textSize="20dp"
-        android:layout_centerInParent="true"/>
+              android:id="@+id/textView2"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentStart="true"
+              android:layout_marginTop="53dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N/A"
+        android:id="@+id/reactMinTime10"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp"/>
 
 </RelativeLayout>
 
