@@ -1,21 +1,16 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 /**
  * Created by quentinlautischer on 2015-09-09.
- * http://www.androidhive.info/2013/10/android-tab-layout-with-swipeable-views-1/
+ * http://www.androidhive.info/2013/10/android-tab-layout-with-swipeable-views-1/\
+ * https://github.com/codepath/android_guides/wiki/Google-Play-Style-Tabs-using-TabLayout
  */
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.TextView;
-import java.util.Random;
 
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -23,8 +18,12 @@ public class MainActivity extends FragmentActivity implements
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
+
+    private StatsController statsController;
     // Tab titles
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +34,8 @@ public class MainActivity extends FragmentActivity implements
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
+        statsController = new StatsController();
 
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);

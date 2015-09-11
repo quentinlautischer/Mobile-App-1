@@ -1,5 +1,6 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -69,6 +70,9 @@ public class ReactionTimerFragment extends Fragment{
 
 //            Fragment fragment = rootView.getSupportFragmentManager().findFragmentById(R.id.statFragRoot);
 //            fragment.addStat(R.string.reactMinTime10, R.id.reactMinTime10, (int) time);
+
+//            StatsController statsController = rootView.findViewById(R.id.statsController);
+//            statsController.addStat(12);
 
             rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
             rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
