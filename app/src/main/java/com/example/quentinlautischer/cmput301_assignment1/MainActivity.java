@@ -37,7 +37,7 @@ public class MainActivity extends FragmentActivity implements
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        statsController = new StatsController();
+        statsController = new StatsController(this);
 
         // Adding Tabs
         for (String tab_name : tabs) {

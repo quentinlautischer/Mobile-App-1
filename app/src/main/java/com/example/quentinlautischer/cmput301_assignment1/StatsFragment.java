@@ -25,20 +25,26 @@ public class StatsFragment extends Fragment implements Observer{
 
     View _rootView;
 
+    public void onCreate(){
+
+        root = (MainActivity) getActivity();
+        root.getObserver().addObserver(this);
+        Log.d("LOL", "Stats added as an observer");
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.stats_fragment, container, false);
 
-        sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-
         root = (MainActivity) getActivity();
-        root.getObserver().addObserver(this);
-        Log.d("LOL", "Stats added as an observer");
+        sharedPref = root.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
 
         _rootView = rootView;
 
-//        initStats(rootView);
+        initStats(rootView);
 
         return rootView;
     }
@@ -54,6 +60,7 @@ public class StatsFragment extends Fragment implements Observer{
 
     private void initStats(View rootView) {
         long value = sharedPref.getInt(getString(R.string.reactMinTime10), 0);
+        Log.d("THIS IS INIT SAVE", String.valueOf(value));
         TextView mTextView = (TextView) rootView.findViewById(R.id.reactMinTime10);
         mTextView.setText(String.valueOf(value));
     }

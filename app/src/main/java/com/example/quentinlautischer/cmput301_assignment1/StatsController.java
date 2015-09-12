@@ -15,13 +15,17 @@ public class StatsController extends Observable{
 
     private int someStat;
 
+    MainActivity root;
 
     SharedPreferences sharedPref;
-    SharedPreferences.Editor editor; = sharedPref.edit();
-    editor.putInt(getString(R.string.saved_high_score), newHighScore);
-    editor.commit();
-    private StatsController(){
-        sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor;
+
+    public StatsController(MainActivity _root){
+
+        root = _root;
+
+        sharedPref = root.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
 
     }
 
@@ -34,6 +38,9 @@ public class StatsController extends Observable{
 
         Log.d("lol", "SETTING");
         this.someStat = someStat;
+
+        editor.putInt(root.getString(R.string.reactMinTime10), someStat);
+        editor.commit();
         setChanged();
         notifyObservers();
     }
