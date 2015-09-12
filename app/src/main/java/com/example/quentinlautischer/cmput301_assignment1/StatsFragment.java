@@ -29,16 +29,6 @@ public class StatsFragment extends Fragment {
         return rootView;
     }
 
-    public void addStat(int statStringName, int statId,int value) {
-        editor = sharedPref.edit();
-        editor.putInt(getString(statStringName), value);
-        editor.commit();
-
-//        TextView mTextView = (TextView) _rootView.findViewById(statId);
-//        mTextView.setText(String.valueOf(value));
-    }
-
-
     private void initStats(View rootView) {
         long value = sharedPref.getInt(getString(R.string.reactMinTime10), 0);
         TextView mTextView = (TextView) rootView.findViewById(R.id.reactMinTime10);

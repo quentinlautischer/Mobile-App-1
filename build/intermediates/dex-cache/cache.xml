@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/Users/quentinlautischer/Development/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jar="/usr/local/share/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-1ec52bc72c36b7048a1a77efed82dccef5c82fd3.jar" />
+        <dex dex="/cshome/lautisch/Documents/cmput301/assignments/cmput301_assignment01/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-6b8f43d628bde674586e533393329d929d7ff825.jar" />
     </item>
     <item
-        jar="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jar="/cshome/lautisch/Documents/cmput301/assignments/cmput301_assignment01/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/pre-dexed/debug/classes-9a15ee472bddb1ac735619d4db7c7dc55716e9c3.jar" />
+        <dex dex="/cshome/lautisch/Documents/cmput301/assignments/cmput301_assignment01/app/build/intermediates/pre-dexed/debug/classes-8d767e4ee029fa32fd93dfcc84bf4c282414be1a.jar" />
     </item>
     <item
-        jar="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jar="/cshome/lautisch/Documents/cmput301/assignments/cmput301_assignment01/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/Users/quentinlautischer/Development/Cmput301/Assignments/cmput301_assignment1/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-a042ea2282e5eb4ebbabb2346b760236292bbc9f.jar" />
+        <dex dex="/cshome/lautisch/Documents/cmput301/assignments/cmput301_assignment01/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-4c99d01f20ec9eefe939d871b0078e6d1175a19a.jar" />
     </item>
 
 </items>
