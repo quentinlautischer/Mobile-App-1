@@ -19,11 +19,9 @@ public class MainActivity extends FragmentActivity implements
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
 
-    private StatsController statsController;
+    public StatsController statsController;
     // Tab titles
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +36,8 @@ public class MainActivity extends FragmentActivity implements
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        statsController = new StatsController();
 
         // Adding Tabs
         for (String tab_name : tabs) {
@@ -66,6 +66,11 @@ public class MainActivity extends FragmentActivity implements
             }
         });
     }
+
+    public StatsController getObserver(){
+        return statsController;
+    }
+
 
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
