@@ -1,5 +1,6 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,21 +16,36 @@ import android.widget.TextView;
 public class BuzzerGameFragment extends Fragment {
 
     private SeekBar playerNumSeekBar;
+    private int numOfPlayers = 2;
+
+    private MainActivity root;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        root = (MainActivity) getActivity();
+
         final View rootView = inflater.inflate(R.layout.buzzer_game_fragment, container, false);
 
         playerNumSeekBar = (SeekBar) rootView.findViewById(R.id.buzzerSeekBar);
 
+
+        rootView.findViewById(R.id.buzzerBeginButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Load new view
+                Intent nextScreen = new Intent(root.getApplicationContext(), BuzzerGameActivity.class);
+                startActivity(nextScreen);
+            }
+        });
+
         playerNumSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-            int num = 2;
+
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                num = i + 2;
+                numOfPlayers = i + 2;
                 final TextView mTextView = (TextView) rootView.findViewById(R.id.numPlayersTextView);
                 mTextView.setText(String.valueOf(i + 2));
 
@@ -42,8 +58,8 @@ public class BuzzerGameFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                final TextView mTextView = (TextView) getView().findViewById(R.id.numPlayersTextView);
-                mTextView.setText(String.valueOf(num));
+                final TextView mTextView = (TextView) root.findViewById(R.id.numPlayersTextView);
+                mTextView.setText(String.valueOf(numOfPlayers));
             }
         });
 
