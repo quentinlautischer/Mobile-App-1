@@ -18,6 +18,8 @@ public class StatsFragment extends Fragment{
 
     public SharedPreferences sharedPref;
 
+    private MainActivity root;
+
 //    private String[] reactStatFields = {  "reactMinTime10", "reactMinTime100", "reactMinTimeAll",
 //                                    "reactMaxTime10", "reactMaxTime100", "reactMaxTimeAll",
 //                                    "reactAvgTime10", "reactAvgTime100", "reactAvgTimeAll",
@@ -33,6 +35,7 @@ public class StatsFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.stats_fragment, container, false);
 
         sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        root = (MainActivity) getActivity();
 
         initStats(rootView);
 
@@ -47,7 +50,8 @@ public class StatsFragment extends Fragment{
     }
 
     private void clearStats(View rootView){
-        something
+
+        root.statsController.clearStats();
         initStats(rootView);
     }
 

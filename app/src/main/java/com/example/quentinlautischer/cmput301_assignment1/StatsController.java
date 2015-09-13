@@ -48,10 +48,11 @@ public class StatsController {
     }
 
     public void clearStats(){
-        String [] reactStat = getResources().getStringArray(R.array.reactStats);
+        String [] reactStat =  root.getResources().getStringArray(R.array.reactStats);
         for (String i : reactStat){
-            editor.putInt(root.getString(i))
+            editor.putInt(root.getString(root.getResources().getIdentifier(i, "string", "com.example.quentinlautischer.cmput301_assignment1")), 0);
         }
+        editor.commit();
     }
 
 }
