@@ -10,10 +10,8 @@ import java.util.Observable;
 /**
  * Created by quentinlautischer on 2015-09-11.
  */
-public class StatsController extends Observable{
+public class StatsController {
 //    private static StatsController mInstance = null;
-
-    private int someStat;
 
     MainActivity root;
 
@@ -30,19 +28,30 @@ public class StatsController extends Observable{
     }
 
 
-    public int getSomeStat() {
-        return someStat;
-    }
+//    public int getSomeStat() {
+//        return someStat;
+//    }
 
     public void setSomeStat(int someStat) {
+        commitStat(someStat, R.string.reactMinTimeAll);
 
-        Log.d("lol", "SETTING");
-        this.someStat = someStat;
+    }
 
-        editor.putInt(root.getString(R.string.reactMinTime10), someStat);
+    private void commitStat(int stat, int identifier){
+        editor.putInt(root.getString(identifier), stat);
+        Log.d("Storing Value at: ", root.getString(identifier));
         editor.commit();
-        setChanged();
-        notifyObservers();
+    }
+
+    public void addReactionClick(int ReactionTime){
+
+    }
+
+    public void clearStats(){
+        String [] reactStat = getResources().getStringArray(R.array.reactStats);
+        for (String i : reactStat){
+            editor.putInt(root.getString(i))
+        }
     }
 
 }

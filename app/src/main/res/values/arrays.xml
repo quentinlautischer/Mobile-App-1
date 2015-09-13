@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="reactStats">
+        <item>reactMinTime10</item>
+        <item>reactMinTime100</item>`
+        <item>reactMinTimeAll</item>
+        <item>reactMaxTime10</item>
+        <item>reactMaxTime100</item>
+        <item>reactMaxTimeAll</item>
+        <item>reactAvgTime10</item>
+        <item>reactAvgTime100</item>
+        <item>reactAvgTimeAll</item>
+        <item>reactMedTime10</item>
+        <item>reactMedTime100</item>
+        <item>reactMedTimeAll</item>
+    </string-array>
+</resources>

@@ -6,5 +6,19 @@
     <string name="action_settings">Settings</string>
     <string name="first">First</string>
     <string name="last">Last</string>
-    <string name="reactMinTime10">reactMinTime10</string>
+
+    <string name="reactMinTime10">reactionStatsTableR2C2</string>
+    <string name="reactMinTime100">reactionStatsTableR2C3</string>
+    <string name="reactMinTimeAll">reactionStatsTableR2C4</string>
+    <string name="reactMaxTime10">reactionStatsTableR3C2</string>
+    <string name="reactMaxTime100">reactionStatsTableR3C3</string>
+    <string name="reactMaxTimeAll">reactionStatsTableR3C4</string>
+    <string name="reactAvgTime10">reactionStatsTableR4C2</string>
+    <string name="reactAvgTime100">reactionStatsTableR4C3</string>
+    <string name="reactAvgTimeAll">reactionStatsTableR4C4</string>
+    <string name="reactMedTime10">reactionStatsTableR5C2</string>
+    <string name="reactMedTime100">reactionStatsTableR5C3</string>
+    <string name="reactMedTimeAll">reactionStatsTableR5C4</string>
+
+
 </resources>
