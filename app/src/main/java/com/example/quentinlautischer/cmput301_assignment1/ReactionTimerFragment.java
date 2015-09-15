@@ -60,7 +60,7 @@ public class ReactionTimerFragment extends Fragment{
                 @Override
                 public void run() {
                     getView().findViewById(R.id.reactionTimerAlert).setVisibility(View.VISIBLE);
-                    getView().findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#CC0000"));
+                    getView().findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#CC1234"));
                     awaitingClick = true;
                     reactionTimer.start();
                 }

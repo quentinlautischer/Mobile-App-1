@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -12,21 +13,23 @@ import java.util.Observable;
  */
 public class StatsController {
 //    private static StatsController mInstance = null;
+    ArrayList<Integer> reactionTimes;
 
     MainActivity root;
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
-    public StatsController(MainActivity _root){
+    public StatsController(MainActivity root){
 
-        root = _root;
+        this.root = root;
+
+        reactionTimes = new ArrayList<Integer>();
 
         sharedPref = root.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
     }
-
 
 //    public int getSomeStat() {
 //        return someStat;
@@ -55,4 +58,28 @@ public class StatsController {
         editor.commit();
     }
 
+    public void addReactionTime(Integer time){
+        this.reactionTimes.add(time);
+    }
+
+    public int getMinTimeForLast(Integer xTimes){
+        if (xTimes.equals(Integer.MAX_VALUE)){
+            xTimes = reactionTimes.size();
+        }
+
+
+        return 0;
+    }
+
+    public int getMaxTimeForLast(double xTimes){
+        return 0;
+    }
+
+    public int getAvgTimeForLast(double xTimes){
+        return 0;
+    }
+
+    public int getMedTimeForLast(double xTimes){
+        return 0;
+    }
 }
