@@ -73,10 +73,20 @@ public class StatsFragment extends Fragment{
             mTextView.setText(String.valueOf(value));
 
         }
+
+        setStatTableEntity("reactMinTime10");
+
+
 //        Log.d("Request stat from: ", getString(R.string.reactMinTimeAll));
 //        int value = sharedPref.getInt(getString(R.string.reactMinTimeAll), 0);
 //        TextView mTextView = (TextView) rootView.findViewById(R.id.reactionStatsTableR2C4);
 //        mTextView.setText(String.valueOf(value));
     }
 
+
+    private void setStatTableEntity(String tableAttribute, Integer value) {
+        String tableNum = getString(getResources().getIdentifier(tableAttribute, "string", "com.example.quentinlautischer.cmput301_assignment1"));
+        TextView mTextView = (TextView) getActivity().findViewById(getResources().getIdentifier(tableNum, "id", "com.example.quentinlautischer.cmput301_assignment1"));
+        mTextView.setText(String.valueOf(value));
+    }
 }
