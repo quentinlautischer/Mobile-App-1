@@ -12,9 +12,9 @@ import java.util.ArrayList;
  */
 
 public class StatsControllerTest extends TestCase {
-    public void testReactionList(){
-        StatsController statCtrl = new StatsController(new MainActivity());
-        assertTrue("Ensure StatsController create ArrayList", statCtrl.reactionTimes.equals(new ArrayList<Integer>()));
-    }
+//    public void testReactionList(){
+//        StatsController statCtrl = new StatsController(new MainActivity());
+//        assertTrue("Ensure StatsController create ArrayList", statCtrl.reactionTimes.equals(new ArrayList<Integer>()));
+//    }
 
 }

@@ -37,7 +37,17 @@ public class StatsController {
     }
 
     private void loadReactionTimes(){
-
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(100);
+        addReactionTime(1000);
     }
 
     private void saveReactionTimes(){
@@ -55,11 +65,7 @@ public class StatsController {
     }
 
     public void clearStats(){
-        String [] reactStat =  root.getResources().getStringArray(R.array.reactStats);
-        for (String i : reactStat){
-            editor.putInt(root.getString(root.getResources().getIdentifier(i, "string", "com.example.quentinlautischer.cmput301_assignment1")), 0);
-        }
-        editor.commit();
+       reactionTimes = new ArrayList<Integer>();
     }
 
     public void addReactionTime(Integer time){
@@ -80,6 +86,7 @@ public class StatsController {
             if (currentValue < minValue) {
                 minValue = currentValue;
             }
+            count++;
         }
         return minValue;
     }
@@ -97,29 +104,35 @@ public class StatsController {
             if (currentValue > maxValue) {
                 maxValue = currentValue;
             }
+            count++;
         }
+
         return maxValue;
     }
 
     public Integer getAvgTimeForLast(Integer xTimes){
-        if (xTimes.equals(Integer.MAX_VALUE)){
+        if (reactionTimes.size() < xTimes){
             xTimes = reactionTimes.size();
         }
+
         Iterator<Integer> iter = reactionTimes.iterator();
         int count = 0;
         Integer sum = 0;
         while(iter.hasNext() && count < xTimes){
             Integer currentValue = iter.next();
             sum = sum + currentValue;
+            count++;
         }
         return (sum / xTimes);
     }
 
     public Integer getMedTimeForLast(Integer xTimes){
-        if (xTimes.equals(Integer.MAX_VALUE)){
+
+        if (reactionTimes.size() < xTimes){
             xTimes = reactionTimes.size();
         }
 
+        if ()
         List<Integer> list = reactionTimes.subList(0, xTimes);
         Collections.sort(list);
 
