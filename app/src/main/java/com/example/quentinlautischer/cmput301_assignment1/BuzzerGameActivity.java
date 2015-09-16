@@ -44,7 +44,7 @@ public class BuzzerGameActivity extends Activity {
                     Toast.makeText(view.getContext(),
                             "Button clicked index = " + id_, Toast.LENGTH_SHORT)
                             .show();
-                    statsController.addBuzzerClick("P2", "p1");
+//                    statsController.addBuzzerClick("P2", "p1");
                 }
             });
 
