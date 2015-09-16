@@ -29,9 +29,9 @@ public class StatsFragment extends Fragment{
 //                                    "reactAvgTime10", "reactAvgTime100", "reactAvgTimeAll",
 //                                    "reactMedTime10", "reactMedTime100", "reactMedTimeAll" };
 
-    private String[] buzzerStatFields = { "2P_player1", "2P_player2",
-                                    "3P_player1", "3P_player2", "3P_player3",
-                                    "4P_player1", "4P_player2", "4P_player3", "4P_player4" };
+    private String[] buzzerStatFields = { "b2P_p1", "b2P_p2",
+                                    "b3P_p1", "b3P_p2", "b3P_p3",
+                                    "b4P_p1", "b4P_p2", "b4P_p3", "b4P_p4" };
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -115,6 +115,11 @@ public class StatsFragment extends Fragment{
         setStatTableEntity("reactMedTime10", root.statsController.getMedTimeForLast(10));
         setStatTableEntity("reactMedTime100", root.statsController.getMedTimeForLast(100));
         setStatTableEntity("reactMedTimeAll", root.statsController.getMedTimeForLast(Integer.MAX_VALUE));
+
+        for(String key: buzzerStatFields){
+            setStatTableEntity(key, root.statsController.getBuzzerClicks(key));
+        }
+
 
     }
 

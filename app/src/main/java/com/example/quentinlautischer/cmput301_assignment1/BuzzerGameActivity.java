@@ -19,7 +19,7 @@ public class BuzzerGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buzzer_button_layout);
 
-        StatsController statsController = MainActivity.statsController;
+        final StatsController statsController = MainActivity.statsController;
 
         final Intent intent = getIntent();
         String numPl = intent.getStringExtra(BuzzerGameFragment.NUM_OF_PLAYERS);
@@ -44,6 +44,7 @@ public class BuzzerGameActivity extends Activity {
                     Toast.makeText(view.getContext(),
                             "Button clicked index = " + id_, Toast.LENGTH_SHORT)
                             .show();
+                    statsController.addBuzzerClick("P2", "p1");
                 }
             });
 

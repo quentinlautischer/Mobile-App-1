@@ -20,5 +20,16 @@
     <string name="reactMedTime100">reactionStatsTableR5C3</string>
     <string name="reactMedTimeAll">reactionStatsTableR5C4</string>
 
+    <string name="b2P_p1">statsTableR2C2</string>
+    <string name="b2P_p2">statsTableR2C3</string>
+    <string name="b3P_p1">statsTableR3C2</string>
+    <string name="b3P_p2">statsTableR3C3</string>
+    <string name="b3P_p3">statsTableR3C4</string>
+    <string name="b4P_p1">statsTableR4C2</string>
+    <string name="b4P_p2">statsTableR4C3</string>
+    <string name="b4P_p3">statsTableR4C4</string>
+    <string name="b4P_p4">statsTableR4C5</string>
+
+
 
 </resources>

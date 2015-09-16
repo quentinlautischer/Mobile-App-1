@@ -27,7 +27,8 @@ public class StatsController extends Application {
         this.root = root;
 
         reactionTimes = new ArrayList<Integer>();
-        initBuzzerClicks();
+        loadBuzzerClicks();
+
 
         loadReactionTimes();
 
@@ -36,17 +37,28 @@ public class StatsController extends Application {
 
     }
 
-    private void initBuzzerClicks(){
+    private void loadBuzzerClicks(){
         buzzerClicks = new HashMap<String, Integer>();
-        buzzerClicks.put("2P_p1", 0);
-        buzzerClicks.put("2P_p2", 0);
-        buzzerClicks.put("3P_p1", 0);
-        buzzerClicks.put("3P_p2", 0);
-        buzzerClicks.put("3P_p3", 0);
-        buzzerClicks.put("4P_p1", 0);
-        buzzerClicks.put("4P_p2", 0);
-        buzzerClicks.put("4P_p3", 0);
-        buzzerClicks.put("4P_p4", 0);
+        buzzerClicks.put("b2P_p1", 0);
+        buzzerClicks.put("b2P_p2", 0);
+        buzzerClicks.put("b3P_p1", 2);
+        buzzerClicks.put("b3P_p2", 0);
+        buzzerClicks.put("b3P_p3", 0);
+        buzzerClicks.put("b4P_p1", 0);
+        buzzerClicks.put("b4P_p2", 5);
+        buzzerClicks.put("b4P_p3", 0);
+        buzzerClicks.put("b4P_p4", 1);
+    }
+
+    public void addBuzzerClick(String gameMode, String player){
+        String key = "b" + gameMode + "_" + player;
+        if (buzzerClicks.containsKey(key)){
+            buzzerClicks.put(key, buzzerClicks.get(key) + 1);
+        } else { throw new IllegalArgumentException("Key does not correspond to data reference"); }
+    }
+
+    public Integer getBuzzerClicks(String key){
+        return buzzerClicks.get(key);
     }
 
     private void loadReactionTimes(){

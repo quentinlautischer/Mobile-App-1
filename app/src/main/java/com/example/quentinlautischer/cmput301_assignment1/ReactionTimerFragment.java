@@ -77,6 +77,7 @@ public class ReactionTimerFragment extends Fragment{
 //            StatsController statsController = rootView.findViewById(R.id.statsController);
 //            statsController.addStat(12);
             root.statsController.addReactionTime((int) time);
+            root.statsController.addBuzzerClick("2P", "p1");
 
                     rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
             rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
