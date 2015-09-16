@@ -7,6 +7,7 @@ package com.example.quentinlautischer.cmput301_assignment1;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -19,7 +20,7 @@ public class MainActivity extends FragmentActivity implements
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
 
-    public StatsController statsController;
+    public static StatsController statsController;
     // Tab titles
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
 
@@ -68,7 +69,7 @@ public class MainActivity extends FragmentActivity implements
     }
 
     public StatsController getObserver(){
-        return statsController;
+        return this.statsController;
     }
 
 

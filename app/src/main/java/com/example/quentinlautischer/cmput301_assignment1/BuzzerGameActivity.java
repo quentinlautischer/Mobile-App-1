@@ -19,6 +19,8 @@ public class BuzzerGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buzzer_button_layout);
 
+        StatsController statsController = MainActivity.statsController;
+
         final Intent intent = getIntent();
         String numPl = intent.getStringExtra(BuzzerGameFragment.NUM_OF_PLAYERS);
         Integer numPlayers = Integer.valueOf(numPl);

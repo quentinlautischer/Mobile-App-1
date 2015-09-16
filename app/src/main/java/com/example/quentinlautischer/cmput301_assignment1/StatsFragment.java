@@ -1,6 +1,8 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,7 @@ public class StatsFragment extends Fragment{
     public SharedPreferences sharedPref;
 
     private MainActivity root;
+
     private View rootView;
 
 //    private String[] reactStatFields = {  "reactMinTime10", "reactMinTime100", "reactMinTimeAll",
@@ -43,8 +46,30 @@ public class StatsFragment extends Fragment{
         rootView.findViewById(R.id.clearStats).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                root.statsController.clearStats();
-                initStats(view);
+
+                final View thisView = view;
+                AlertDialog.Builder alert = new AlertDialog.Builder(root);
+                alert.setTitle("Are you sure you want to clear stats?");
+                // alert.setMessage("Message");
+
+                alert.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        root.statsController.clearStats();
+                        initStats(thisView);
+                    }
+                });
+
+                alert.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        });
+
+                alert.show();
+
+
+
+
             }
         });
 
