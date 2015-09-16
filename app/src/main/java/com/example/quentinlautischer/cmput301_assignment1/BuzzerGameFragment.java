@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.app.Application;
 
 /**
  * Created by quentinlautischer on 2015-09-09.
  */
 public class BuzzerGameFragment extends Fragment {
+    public final static String NUM_OF_PLAYERS = "com.example.quentinlautischer.cmput301_assignment1.MESSAGE";
 
     private SeekBar playerNumSeekBar;
     private int numOfPlayers = 2;
@@ -36,6 +38,7 @@ public class BuzzerGameFragment extends Fragment {
             public void onClick(View view) {
                 //Load new view
                 Intent nextScreen = new Intent(root.getApplicationContext(), BuzzerGameActivity.class);
+                nextScreen.putExtra(NUM_OF_PLAYERS, String.valueOf(numOfPlayers));
                 startActivity(nextScreen);
             }
         });
