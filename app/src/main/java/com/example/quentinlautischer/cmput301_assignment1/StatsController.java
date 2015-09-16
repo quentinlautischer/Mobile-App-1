@@ -88,6 +88,11 @@ public class StatsController {
             }
             count++;
         }
+
+        if(minValue.equals(Integer.MAX_VALUE)){
+            return 0;
+        }
+
         return minValue;
     }
 
@@ -123,16 +128,24 @@ public class StatsController {
             sum = sum + currentValue;
             count++;
         }
+
+        if (xTimes.equals(0)){
+            return 0;
+        }
         return (sum / xTimes);
     }
 
-    public Integer getMedTimeForLast(Integer xTimes){
 
-        if (reactionTimes.size() < xTimes){
+    public Integer getMedTimeForLast(Integer xTimes){
+        Integer reactSize = reactionTimes.size();
+        if (reactSize < xTimes){
+            if (reactSize.equals(0)){
+                return 0;
+            }
             xTimes = reactionTimes.size();
         }
 
-        if ()
+
         List<Integer> list = reactionTimes.subList(0, xTimes);
         Collections.sort(list);
 

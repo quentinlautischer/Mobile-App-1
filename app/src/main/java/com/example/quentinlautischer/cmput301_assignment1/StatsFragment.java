@@ -87,9 +87,9 @@ public class StatsFragment extends Fragment{
         setStatTableEntity("reactAvgTime100", root.statsController.getAvgTimeForLast(100));
         setStatTableEntity("reactAvgTimeAll", root.statsController.getAvgTimeForLast(Integer.MAX_VALUE));
 
-        setStatTableEntity("reactMedTime10", root.statsController.getMedTimeForLast(10));
-        setStatTableEntity("reactMedTime100", root.statsController.getMedTimeForLast(100));
-        setStatTableEntity("reactMedTimeAll", root.statsController.getMedTimeForLast(Integer.MAX_VALUE));
+//        setStatTableEntity("reactMedTime10", root.statsController.getMedTimeForLast(10));
+//        setStatTableEntity("reactMedTime100", root.statsController.getMedTimeForLast(100));
+//        setStatTableEntity("reactMedTimeAll", root.statsController.getMedTimeForLast(Integer.MAX_VALUE));
 
     }
 
