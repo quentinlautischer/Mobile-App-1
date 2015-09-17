@@ -3,6 +3,8 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,14 +19,10 @@ public class StatsController extends Application {
     ArrayList<Integer> reactionTimes;
     HashMap<String, Integer> buzzerClicks;
 
-    MainActivity root;
-
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
     public StatsController(MainActivity root){
-
-        this.root = root;
 
         reactionTimes = new ArrayList<Integer>();
         loadBuzzerClicks();
@@ -51,9 +49,13 @@ public class StatsController extends Application {
     }
 
     public void addBuzzerClick(String gameMode, String player){
+        Log.d("la", "Im getting called bro" + String.valueOf(this));
+
         String key = "b" + gameMode + "_" + player;
         if (buzzerClicks.containsKey(key)){
+            Log.d("la", "Ive made it into the loop");
             buzzerClicks.put(key, buzzerClicks.get(key) + 1);
+            Log.d("la", buzzerClicks.toString());
         } else { throw new IllegalArgumentException("Key does not correspond to data reference"); }
     }
 

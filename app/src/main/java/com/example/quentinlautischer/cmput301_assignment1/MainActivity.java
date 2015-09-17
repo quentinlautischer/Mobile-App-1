@@ -10,14 +10,16 @@ import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
 
-    private ViewPager viewPager;
-    private TabsPagerAdapter mAdapter;
+    public ViewPager viewPager;
+    public TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
 
     public static StatsController statsController;
@@ -49,17 +51,23 @@ public class MainActivity extends FragmentActivity implements
         /**
          * on swiping the viewpager make respective tab selected
          * */
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+
 
             @Override
             public void onPageSelected(int position) {
                 // on changing the page
                 // make respected tab selected
+
                 actionBar.setSelectedNavigationItem(position);
+
+
             }
 
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
+
             }
 
             @Override
@@ -68,24 +76,25 @@ public class MainActivity extends FragmentActivity implements
         });
     }
 
-    public StatsController getObserver(){
-        return this.statsController;
-    }
-
-
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
+//        TabsPagerAdapter adapter = ((TabsPagerAdapter) viewPager.getAdapter());
+//        Fragment fragment = adapter.f1;
+//        fragment.onResume();
     }
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // on tab selected
         // show respected fragment view
+
         viewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+
+
     }
 
 }

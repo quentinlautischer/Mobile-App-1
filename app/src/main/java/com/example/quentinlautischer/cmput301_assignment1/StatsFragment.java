@@ -36,12 +36,20 @@ public class StatsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.stats_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.stats_fragment, container, false);
 
-        sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        root = (MainActivity) getActivity();
+        Log.d("la", "This isnt called all the itme???");
+
+        this.sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        this.root = (MainActivity) getActivity();
         this.rootView = rootView;
-        initStats(rootView);
+//        initStats(rootView);
+
+        rootView.findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+                                                                   @Override
+                                                                   public void onClick(View view) {
+                                                                initStats(rootView);   }
+                                                               });
 
         rootView.findViewById(R.id.clearStats).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +75,19 @@ public class StatsFragment extends Fragment{
 
                 alert.show();
 
-
-
-
             }
         });
 
         return rootView;
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d("la", "clearly not getting called");
+        initStats(rootView);
+    }
+
 
     private void clearStats(View rootView){
 

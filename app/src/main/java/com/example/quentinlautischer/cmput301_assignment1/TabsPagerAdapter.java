@@ -13,6 +13,8 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    public  Fragment f1;
+
     @Override
     public Fragment getItem(int index) {
 
@@ -25,7 +27,9 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
                 return new BuzzerGameFragment();
             case 2:
                 // Movies fragment activity
-                return new StatsFragment();
+                Fragment f = new StatsFragment();
+                f1 = f;
+                return f;
         }
 
         return null;

@@ -3,7 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#67dfc6">
+    android:background="#67dfc6"
+    android:id="@+id/buzzer_game_fragment">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/buzzer_setup_layout"
+        android:visibility="visible">
 
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -43,5 +51,16 @@
         android:layout_marginBottom="52dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/buzzer_button_layout"
+        android:visibility="invisible">
+
+    </LinearLayout>
 
 </RelativeLayout>
