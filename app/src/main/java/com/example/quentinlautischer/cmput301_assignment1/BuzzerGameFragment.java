@@ -1,5 +1,7 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -43,7 +45,7 @@ public class BuzzerGameFragment extends Fragment {
             public void onClick(View view) {
                 //Load new view
 
-                LinearLayout linear = (LinearLayout) rootView.findViewById(R.id.buzzer_button_layout);
+                final LinearLayout linear = (LinearLayout) rootView.findViewById(R.id.buzzer_button_layout);
                 for(int i=0; i < numOfPlayers; i++){
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -63,7 +65,33 @@ public class BuzzerGameFragment extends Fragment {
                                     "Button clicked index = " + id_, Toast.LENGTH_SHORT)
                                     .show();
 
-                        addBuzzer("2P", "p1");
+                        addBuzzer(String.valueOf(numOfPlayers) + "P", "p" + id_);
+
+                            final View thisView = view;
+                            AlertDialog.Builder alert = new AlertDialog.Builder(root);
+                            alert.setTitle("Player " + id_ + " Won!");
+
+                            alert.setPositiveButton("Replay", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+
+                                }
+                            });
+
+                            alert.setNegativeButton("Return",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            rootView.findViewById(R.id.buzzer_setup_layout).setVisibility(View.VISIBLE);
+                                            linear.removeAllViews();
+                                        }
+                                    });
+
+                            alert.show();
+
+
+
+
+
+
                         }
                     });
 

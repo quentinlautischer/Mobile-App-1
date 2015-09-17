@@ -35,6 +35,19 @@ public class StatsController extends Application {
 
     }
 
+    private void initBuzzerClicks(){
+        buzzerClicks = new HashMap<String, Integer>();
+        buzzerClicks.put("b2P_p1", 0);
+        buzzerClicks.put("b2P_p2", 0);
+        buzzerClicks.put("b3P_p1", 0);
+        buzzerClicks.put("b3P_p2", 0);
+        buzzerClicks.put("b3P_p3", 0);
+        buzzerClicks.put("b4P_p1", 0);
+        buzzerClicks.put("b4P_p2", 0);
+        buzzerClicks.put("b4P_p3", 0);
+        buzzerClicks.put("b4P_p4", 0);
+    }
+
     private void loadBuzzerClicks(){
         buzzerClicks = new HashMap<String, Integer>();
         buzzerClicks.put("b2P_p1", 0);
@@ -89,6 +102,7 @@ public class StatsController extends Application {
 
     public void clearStats(){
        reactionTimes = new ArrayList<Integer>();
+        initBuzzerClicks();
     }
 
     public void addReactionTime(Integer time){
