@@ -1,16 +1,13 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.Random;
 
 /**
@@ -19,7 +16,7 @@ import java.util.Random;
 public class ReactionTimerFragment extends Fragment{
 
     private Boolean awaitingClick = false;
-    private ReactionTimer reactionTimer;
+    private Timer reactionTimer;
 
     MainActivity root;
 
@@ -29,10 +26,8 @@ public class ReactionTimerFragment extends Fragment{
 
             View rootView = inflater.inflate(R.layout.reaction_timer_fragment, container, false);
 
-
             root = (MainActivity) getActivity();
-
-            reactionTimer = new ReactionTimer();
+            reactionTimer = new Timer();
 
             rootView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -67,25 +62,36 @@ public class ReactionTimerFragment extends Fragment{
             }, alertDelayTime);
         } else {
             //Reaction
-            long time = reactionTimer.stop();
+            int time = reactionTimer.stop();
             awaitingClick = false;
 
             final TextView mTextView = (TextView) rootView.findViewById(R.id.reactionTimerTextView);
+
             mTextView.setText("Tap to begin again \n Your time was: ");
-            mTextView.append(String.valueOf(time) + "ms");
+            mTextView.append(String.valueOf(time) + "ms \n");
+            if(root.statsController.getMinTimeForLast(Integer.MAX_VALUE) > time) {
+                mTextView.append("NEW RECORD!!");
+            }
 
-//            StatsController statsController = rootView.findViewById(R.id.statsController);
-//            statsController.addStat(12);
-            root.statsController.addReactionTime((int) time);
-            root.statsController.addBuzzerClick("2P", "p1");
+            root.statsController.addReactionTime(time);
 
-                    rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
+            rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
             rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
             rootView.findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
-
-
         }
 
+    }
+
+    public class Timer {
+        private int startTime = 0;
+
+        public void start() {
+            this.startTime = (int) System.currentTimeMillis();
+        }
+
+        public int stop() {
+            return (int) ((System.currentTimeMillis() - this.startTime));
+        }
     }
 
 }

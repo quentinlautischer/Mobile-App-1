@@ -7,12 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 
 /**
  * Created by quentinlautischer on 2015-09-09.
@@ -20,20 +18,12 @@ import android.widget.TextView;
 public class StatsFragment extends Fragment{
 
     public SharedPreferences sharedPref;
-
     private MainActivity root;
-
     private View rootView;
-
-//    private String[] reactStatFields = {  "reactMinTime10", "reactMinTime100", "reactMinTimeAll",
-//                                    "reactMaxTime10", "reactMaxTime100", "reactMaxTimeAll",
-//                                    "reactAvgTime10", "reactAvgTime100", "reactAvgTimeAll",
-//                                    "reactMedTime10", "reactMedTime100", "reactMedTimeAll" };
 
     private String[] buzzerStatFields = { "b2P_p1", "b2P_p2",
                                     "b3P_p1", "b3P_p2", "b3P_p3",
                                     "b4P_p1", "b4P_p2", "b4P_p3", "b4P_p4" };
-
 
     @Override
     public void setMenuVisibility(final boolean visible){
@@ -69,7 +59,6 @@ public class StatsFragment extends Fragment{
                 final View thisView = view;
                 AlertDialog.Builder alert = new AlertDialog.Builder(root);
                 alert.setTitle("Are you sure you want to clear stats?");
-                // alert.setMessage("Message");
 
                 alert.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -83,17 +72,11 @@ public class StatsFragment extends Fragment{
                             public void onClick(DialogInterface dialog, int whichButton) {
                             }
                         });
-
                 alert.show();
-
             }
         });
 
         return rootView;
-    }
-
-    private void clearStats(View rootView){
-
     }
 
     private void initStats(View rootView) {
@@ -117,7 +100,6 @@ public class StatsFragment extends Fragment{
             setStatTableEntity(key, root.statsController.getBuzzerClicks(key));
         }
     }
-
 
     private void setStatTableEntity(String tableAttribute, Integer value) {
         String tableNum = getString(getResources().getIdentifier(tableAttribute, "string", "com.example.quentinlautischer.cmput301_assignment1"));

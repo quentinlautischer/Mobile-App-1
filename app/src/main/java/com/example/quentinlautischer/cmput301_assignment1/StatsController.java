@@ -3,8 +3,6 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,7 +13,6 @@ import java.util.List;
  * Created by quentinlautischer on 2015-09-11.
  */
 public class StatsController extends Application {
-//    private static StatsController mInstance = null;
     ArrayList<Integer> reactionTimes;
     HashMap<String, Integer> buzzerClicks;
 
@@ -26,16 +23,26 @@ public class StatsController extends Application {
 
         reactionTimes = new ArrayList<Integer>();
         loadBuzzerClicks();
-
-
         loadReactionTimes();
 
         sharedPref = root.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
-
     }
 
-    private void initBuzzerClicks(){
+    private void saveData(){
+//        Serial sd = SOMESERIALIZING_METHOD;
+//        editor.putStringSet("reactionTimes", serialData);
+//        editor.commit();
+    }
+
+    public void clearStats(){
+        reactionTimes = new ArrayList<Integer>();
+        clearBuzzerClicks();
+    }
+
+    //Buzzer Game Methods
+
+    private void clearBuzzerClicks(){
         buzzerClicks = new HashMap<String, Integer>();
         buzzerClicks.put("b2P_p1", 0);
         buzzerClicks.put("b2P_p2", 0);
@@ -62,19 +69,17 @@ public class StatsController extends Application {
     }
 
     public void addBuzzerClick(String gameMode, String player){
-        Log.d("la", "Im getting called bro" + String.valueOf(this));
-
         String key = "b" + gameMode + "_" + player;
         if (buzzerClicks.containsKey(key)){
-            Log.d("la", "Ive made it into the loop");
             buzzerClicks.put(key, buzzerClicks.get(key) + 1);
-            Log.d("la", buzzerClicks.toString());
         } else { throw new IllegalArgumentException("Key does not correspond to data reference"); }
     }
 
     public Integer getBuzzerClicks(String key){
         return buzzerClicks.get(key);
     }
+
+    //Reaction Timer Methods
 
     private void loadReactionTimes(){
         addReactionTime(100);
@@ -88,26 +93,10 @@ public class StatsController extends Application {
         addReactionTime(100);
         addReactionTime(100);
         addReactionTime(1000);
-
-//        String sd = sharedPref.getString("rectionTimes", "0");
-//        dd = sd.DESERIALIZE;
-    }
-
-
-    private void saveReactionTimes(){
-//        Serial sd = SOMESERIALIZING_METHOD;
-//        editor.putStringSet("reactionTimes", serialData);
-//        editor.commit();
-    }
-
-    public void clearStats(){
-       reactionTimes = new ArrayList<Integer>();
-        initBuzzerClicks();
     }
 
     public void addReactionTime(Integer time){
         this.reactionTimes.add(0, time);
-        saveReactionTimes();
     }
 
     public Integer getMinTimeForLast(Integer xTimes){

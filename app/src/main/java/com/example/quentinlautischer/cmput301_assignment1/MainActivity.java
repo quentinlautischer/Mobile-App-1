@@ -7,13 +7,10 @@ package com.example.quentinlautischer.cmput301_assignment1;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -26,21 +23,7 @@ public class MainActivity extends FragmentActivity implements
 
     public static StatsController statsController;
 
-    // Tab titles
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
-
-
-    @Override
-    public void onBackPressed(){
-        if ( findViewById(R.id.buzzer_setup_layout).getVisibility() == View.INVISIBLE ){
-            LinearLayout linear = (LinearLayout) findViewById(R.id.buzzer_button_layout);
-
-            findViewById(R.id.buzzer_setup_layout).setVisibility(View.VISIBLE);
-            linear.removeAllViews();
-        } else{
-            super.onBackPressed();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,63 +41,48 @@ public class MainActivity extends FragmentActivity implements
 
         statsController = new StatsController(this);
 
-        // Adding Tabs
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
 
-        /**
-         * on swiping the viewpager make respective tab selected
-         * */
-
-
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-
-
             @Override
             public void onPageSelected(int position) {
-                // on changing the page
-                // make respected tab selected
-
+                // on changing the page make respected tab selected
                 actionBar.setSelectedNavigationItem(position);
-
-
             }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-            }
+            public void onPageScrolled(int arg0, float arg1, int arg2) {}
 
             @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
+            public void onPageScrollStateChanged(int arg0) {}
         });
     }
 
     @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-
-    }
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {}
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // on tab selected
-        // show respected fragment view
-
+        //on tab selected show respected fragment view
         viewPager.setCurrentItem(tab.getPosition());
-
-
-
     }
 
     @Override
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+    public void onTabUnselected(Tab tab, FragmentTransaction ft) {}
 
+    @Override
+    public void onBackPressed(){
+        if ( findViewById(R.id.buzzer_setup_layout).getVisibility() == View.INVISIBLE ){
+            LinearLayout linear = (LinearLayout) findViewById(R.id.buzzer_button_layout);
 
+            findViewById(R.id.buzzer_setup_layout).setVisibility(View.VISIBLE);
+            linear.removeAllViews();
+        } else{
+            super.onBackPressed();
+        }
     }
 
 }
