@@ -34,12 +34,19 @@ public class StatsFragment extends Fragment{
                                     "b3P_p1", "b3P_p2", "b3P_p3",
                                     "b4P_p1", "b4P_p2", "b4P_p3", "b4P_p4" };
 
+
+    @Override
+    public void setMenuVisibility(final boolean visible){
+        super.setMenuVisibility(visible);
+        if (visible && isResumed()){
+            initStats(rootView);
+        }
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.stats_fragment, container, false);
-
-        Log.d("la", "This isnt called all the itme???");
 
         this.sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         this.root = (MainActivity) getActivity();
@@ -85,38 +92,11 @@ public class StatsFragment extends Fragment{
         return rootView;
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        Log.d("la", "clearly not getting called");
-        initStats(rootView);
-    }
-
-
     private void clearStats(View rootView){
 
     }
 
     private void initStats(View rootView) {
-//        String [] reactStat = getResources().getStringArray(R.array.reactStats);
-//        Log.d("RIGHT BEFORE", "THE STORM");
-//        for (String i : reactStat){
-//            Log.d("THE FIRST STAT IS: ", i);
-//            Log.d("GETTING THINGS", "lala");
-//            String tableNum = getString(getResources().getIdentifier(i, "string", "com.example.quentinlautischer.cmput301_assignment1"));
-//            Log.d("TableNum", tableNum);
-//
-//
-//            int value = sharedPref.getInt(tableNum, 0);
-//
-//            Log.d("Moving On to Text View", "al");
-//
-//            TextView mTextView = (TextView) rootView.findViewById(R.id.reactionSTableR2C4);
-//            TextView mTextView = (TextView) rootView.findViewById(getResources().getIdentifier(tableNum, "id", "com.example.quentinlautischer.cmput301_assignment1"));
-//            mTextView.setText(String.valueOf(value));
-//
-//        }
-
         setStatTableEntity("reactMinTime10", root.statsController.getMinTimeForLast(10));
         setStatTableEntity("reactMinTime100", root.statsController.getMinTimeForLast(100));
         setStatTableEntity("reactMinTimeAll", root.statsController.getMinTimeForLast(Integer.MAX_VALUE));
@@ -136,15 +116,12 @@ public class StatsFragment extends Fragment{
         for(String key: buzzerStatFields){
             setStatTableEntity(key, root.statsController.getBuzzerClicks(key));
         }
-
-
     }
 
 
     private void setStatTableEntity(String tableAttribute, Integer value) {
         String tableNum = getString(getResources().getIdentifier(tableAttribute, "string", "com.example.quentinlautischer.cmput301_assignment1"));
-        TextView mTextView = (TextView) this.rootView.findViewById(getResources().getIdentifier(tableNum, "id", "com.example.quentinlautischer.cmput301_assignment1"));
-//        Log.d("The value is: " + String.valueOf(value), "");
+        TextView mTextView = (TextView) rootView.findViewById(getResources().getIdentifier(tableNum, "id", "com.example.quentinlautischer.cmput301_assignment1"));
         mTextView.setText(String.valueOf(value));
     }
 }

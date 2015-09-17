@@ -14,6 +14,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -23,8 +25,22 @@ public class MainActivity extends FragmentActivity implements
     private ActionBar actionBar;
 
     public static StatsController statsController;
+
     // Tab titles
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
+
+
+    @Override
+    public void onBackPressed(){
+        if ( findViewById(R.id.buzzer_setup_layout).getVisibility() == View.INVISIBLE ){
+            LinearLayout linear = (LinearLayout) findViewById(R.id.buzzer_button_layout);
+
+            findViewById(R.id.buzzer_setup_layout).setVisibility(View.VISIBLE);
+            linear.removeAllViews();
+        } else{
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +67,9 @@ public class MainActivity extends FragmentActivity implements
         /**
          * on swiping the viewpager make respective tab selected
          * */
+
+
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
 
@@ -78,9 +97,7 @@ public class MainActivity extends FragmentActivity implements
 
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction ft) {
-//        TabsPagerAdapter adapter = ((TabsPagerAdapter) viewPager.getAdapter());
-//        Fragment fragment = adapter.f1;
-//        fragment.onResume();
+
     }
 
     @Override
@@ -89,6 +106,9 @@ public class MainActivity extends FragmentActivity implements
         // show respected fragment view
 
         viewPager.setCurrentItem(tab.getPosition());
+
+
+
     }
 
     @Override
