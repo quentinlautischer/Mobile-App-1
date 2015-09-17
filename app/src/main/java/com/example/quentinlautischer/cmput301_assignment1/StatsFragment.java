@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -43,13 +44,16 @@ public class StatsFragment extends Fragment{
         this.sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         this.root = (MainActivity) getActivity();
         this.rootView = rootView;
-//        initStats(rootView);
+        initStats(rootView);
 
         rootView.findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
-                                                                   @Override
-                                                                   public void onClick(View view) {
-                                                                initStats(rootView);   }
-                                                               });
+            @Override
+            public void onClick(View view) {
+                initStats(rootView);
+            }
+        });
+
+        rootView.findViewById(R.id.clearStats).getBackground().setColorFilter(0xAAFF0000, PorterDuff.Mode.MULTIPLY);
 
         rootView.findViewById(R.id.clearStats).setOnClickListener(new View.OnClickListener() {
             @Override
