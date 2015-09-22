@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#5edf74"
+    android:background="@color/react_bg_color"
     android:id="@+id/reactionTimerRoot">
 
     <TextView android:layout_width="fill_parent"

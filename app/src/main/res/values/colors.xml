@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="react_bg_color" type="color">#5edf74</item>
+    <item name="buzzer_bg_color" type="color">#67dfc6</item>
+    <item name="stats_bg_color" type="color">#fff176</item>
+
+
+    <item name="tableOddLine" type="color">#fff9c4</item>
+    <item name="tableEvenLine" type="color">#ffecb3</item>
+</resources>

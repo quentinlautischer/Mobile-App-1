@@ -3,6 +3,18 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,30 +25,63 @@ import java.util.List;
  * Created by quentinlautischer on 2015-09-11.
  */
 public class StatsController extends Application {
+
+    private static final String FILENAME = "reactionTimes.sav";
+    private static final String FILENAME_buzzer = "reactionTimes.sav";
     ArrayList<Integer> reactionTimes;
     HashMap<String, Integer> buzzerClicks;
 
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
-
     public StatsController(MainActivity root){
 
-        reactionTimes = new ArrayList<Integer>();
+        loadData();
+//        loadReactionTimes();
         loadBuzzerClicks();
-        loadReactionTimes();
+//        loadReactionTimes();
 
-        sharedPref = root.getPreferences(Context.MODE_PRIVATE);
-        editor = sharedPref.edit();
+    }
+
+    private void loadData(){
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            //Following line base on https://google-gson.googlecode.com/svn ...
+            Type listType = new TypeToken<ArrayList<Integer>>() {}.getType();
+            reactionTimes = gson.fromJson(in, listType);
+
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            reactionTimes = new ArrayList<Integer>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void saveData(){
-//        Serial sd = SOMESERIALIZING_METHOD;
-//        editor.putStringSet("reactionTimes", serialData);
-//        editor.commit();
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME,
+                    0);
+
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(reactionTimes, writer);
+            writer.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
     }
 
     public void clearStats(){
         reactionTimes = new ArrayList<Integer>();
+        saveData();
         clearBuzzerClicks();
     }
 
@@ -97,6 +142,7 @@ public class StatsController extends Application {
 
     public void addReactionTime(Integer time){
         this.reactionTimes.add(0, time);
+        saveData();
     }
 
     public Integer getMinTimeForLast(Integer xTimes){
