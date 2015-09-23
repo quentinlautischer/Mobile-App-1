@@ -3,6 +3,7 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class StatsFragment extends Fragment{
     public void setMenuVisibility(final boolean visible){
         super.setMenuVisibility(visible);
         if (visible && isResumed()){
-            initStats(rootView);
+            initStats();
         }
     }
 
@@ -41,12 +42,23 @@ public class StatsFragment extends Fragment{
         this.sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         this.root = (MainActivity) getActivity();
         this.rootView = rootView;
-        initStats(rootView);
+        initStats();
 
-        rootView.findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.emailStats).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initStats(rootView);
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setType("*/*");
+
+
+//                String statsReactionData = root.statsController.getStatsReactionDataPrinted();
+//                String statsBuzzerData = root.statsController.getStatsBuzzerDataPrinted();
+//                emailIntent.putExtra(Intent.EXTRA_TEXT, statsReactionData + statsBuzzerData);
+//                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Stats Data from App");
+                if (emailIntent.resolveActivity(root.getPackageManager()) != null) {
+                    startActivity(emailIntent);
+                }
+
             }
         });
 
@@ -63,7 +75,7 @@ public class StatsFragment extends Fragment{
                 alert.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         root.statsController.clearStats();
-                        initStats(thisView);
+                        initStats();
                     }
                 });
 
@@ -79,7 +91,7 @@ public class StatsFragment extends Fragment{
         return rootView;
     }
 
-    private void initStats(View rootView) {
+    private void initStats() {
         setStatTableEntity("reactMinTime10", root.statsController.getMinTimeForLast(10));
         setStatTableEntity("reactMinTime100", root.statsController.getMinTimeForLast(100));
         setStatTableEntity("reactMinTimeAll", root.statsController.getMinTimeForLast(Integer.MAX_VALUE));

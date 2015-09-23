@@ -44,6 +44,17 @@ public StatsController(MainActivity root){
         loadData();
     }
 
+    public String getStatsReactionDataPrinted(){
+        Gson gson = new Gson();
+        String data = gson.toJson(reactionTimes);
+        return data;
+    }
+    public String getStatsBuzzerDataPrinted(){
+        Gson gson = new Gson();
+        String data = gson.toJson(buzzerClicks);
+        return data;
+    }
+
     public void loadData(){
         Gson gson = new Gson();
         reactionTimes = new ArrayList<Integer>();
