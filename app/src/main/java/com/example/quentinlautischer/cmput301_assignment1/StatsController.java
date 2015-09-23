@@ -3,6 +3,7 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,97 +27,86 @@ import java.util.List;
  */
 public class StatsController extends Application {
 
-    private static final String FILENAME = "reactionTimes.sav";
-    private static final String FILENAME_buzzer = "reactionTimes.sav";
     ArrayList<Integer> reactionTimes;
     HashMap<String, Integer> buzzerClicks;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
-    public StatsController(MainActivity root){
+    String[] buzzerFields = {"b2P_p1","b2P_p2",
+                            "b3P_p1","b3P_p2","b3P_p3",
+                            "b4P_p1","b4P_p2","b4P_p3","b4P_p4"};
+
+public StatsController(MainActivity root){
+
+        sharedPref = root.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
 
         loadData();
-//        loadReactionTimes();
-        loadBuzzerClicks();
-//        loadReactionTimes();
-
     }
 
-    private void loadData(){
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            //Following line base on https://google-gson.googlecode.com/svn ...
-            Type listType = new TypeToken<ArrayList<Integer>>() {}.getType();
-            reactionTimes = gson.fromJson(in, listType);
+    public void loadData(){
+        Gson gson = new Gson();
+        reactionTimes = new ArrayList<Integer>();
+        String reactionTimeJson = sharedPref.getString("reactionTimesData", gson.toJson(reactionTimes));
+        Type listType = new TypeToken<ArrayList<Integer>>() {}.getType();
+        reactionTimes = gson.fromJson(reactionTimeJson, listType);
 
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            reactionTimes = new ArrayList<Integer>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
+        buzzerClicks = new HashMap<String, Integer>();
+        for(String entry: buzzerFields){
+            Integer value = sharedPref.getInt(entry, 0);
+            buzzerClicks.put(entry, value);
         }
-
     }
+
 
     private void saveData(){
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    0);
+        Gson gson = new Gson();
 
-            OutputStreamWriter writer = new OutputStreamWriter(fos);
-            Gson gson = new Gson();
-            gson.toJson(reactionTimes, writer);
-            writer.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
+        editor.putString("reactionTimesData", gson.toJson(reactionTimes));
+        editor.commit();
+
+        for(String entry: buzzerFields){
+            Integer value = buzzerClicks.get(entry);
+            editor.putInt(entry, value);
         }
+        editor.commit();
     }
 
     public void clearStats(){
         reactionTimes = new ArrayList<Integer>();
-        saveData();
         clearBuzzerClicks();
+        saveData();
     }
 
     //Buzzer Game Methods
 
     private void clearBuzzerClicks(){
         buzzerClicks = new HashMap<String, Integer>();
-        buzzerClicks.put("b2P_p1", 0);
-        buzzerClicks.put("b2P_p2", 0);
-        buzzerClicks.put("b3P_p1", 0);
-        buzzerClicks.put("b3P_p2", 0);
-        buzzerClicks.put("b3P_p3", 0);
-        buzzerClicks.put("b4P_p1", 0);
-        buzzerClicks.put("b4P_p2", 0);
-        buzzerClicks.put("b4P_p3", 0);
-        buzzerClicks.put("b4P_p4", 0);
+        for (String entry: buzzerFields) {
+            buzzerClicks.put(entry, 0);
+        }
     }
 
-    private void loadBuzzerClicks(){
-        buzzerClicks = new HashMap<String, Integer>();
-        buzzerClicks.put("b2P_p1", 0);
-        buzzerClicks.put("b2P_p2", 0);
-        buzzerClicks.put("b3P_p1", 2);
-        buzzerClicks.put("b3P_p2", 0);
-        buzzerClicks.put("b3P_p3", 0);
-        buzzerClicks.put("b4P_p1", 0);
-        buzzerClicks.put("b4P_p2", 5);
-        buzzerClicks.put("b4P_p3", 0);
-        buzzerClicks.put("b4P_p4", 1);
-    }
+//    private void loadBuzzerClicks(){
+//        buzzerClicks = new HashMap<String, Integer>();
+//        buzzerClicks.put("b2P_p1", 1);
+//        buzzerClicks.put("b2P_p2", 1);
+//        buzzerClicks.put("b3P_p1", 2);
+//        buzzerClicks.put("b3P_p2", 1);
+//        buzzerClicks.put("b3P_p3", 1);
+//        buzzerClicks.put("b4P_p1", 1);
+//        buzzerClicks.put("b4P_p2", 5);
+//        buzzerClicks.put("b4P_p3", 1);
+//        buzzerClicks.put("b4P_p4", 1);
+//    }
 
     public void addBuzzerClick(String gameMode, String player){
         String key = "b" + gameMode + "_" + player;
         if (buzzerClicks.containsKey(key)){
-            buzzerClicks.put(key, buzzerClicks.get(key) + 1);
+            Integer value =  buzzerClicks.get(key) + 1;
+            buzzerClicks.put(key, value);
+            editor.putInt(key, value);
+            editor.commit();
         } else { throw new IllegalArgumentException("Key does not correspond to data reference"); }
     }
 
@@ -126,19 +116,19 @@ public class StatsController extends Application {
 
     //Reaction Timer Methods
 
-    private void loadReactionTimes(){
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(100);
-        addReactionTime(1000);
-    }
+//    private void loadReactionTimes(){
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(100);
+//        addReactionTime(1000);
+//    }
 
     public void addReactionTime(Integer time){
         this.reactionTimes.add(0, time);

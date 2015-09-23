@@ -7,6 +7,8 @@
     <string name="first">First</string>
     <string name="last">Last</string>
 
+    <string name="reactionTimesData">reactionTimesData</string>
+
     <string name="reactMinTime10">reactionStatsTableR2C2</string>
     <string name="reactMinTime100">reactionStatsTableR2C3</string>
     <string name="reactMinTimeAll">reactionStatsTableR2C4</string>
