@@ -54,7 +54,7 @@ public class BuzzerGameFragment extends Fragment {
                     Button btn1 = ((Button) rootView.findViewById(id_));
                     btn1.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
-                            root.statsController.addBuzzerClick(String.valueOf(numOfPlayers) + "P", "p" + id_);
+                            root.statsModel.addBuzzerClick(String.valueOf(numOfPlayers) + "P", "p" + id_);
 
                             AlertDialog.Builder alert = new AlertDialog.Builder(root);
                             alert.setTitle("Player " + id_ + " Won!");
@@ -101,7 +101,7 @@ public class BuzzerGameFragment extends Fragment {
     }
 
     private void addBuzzer(String gameMode, String player){
-        root.statsController.addBuzzerClick(gameMode, player);
+        root.statsModel.addBuzzerClick(gameMode, player);
     }
 
 }

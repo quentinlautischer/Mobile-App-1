@@ -10,42 +10,40 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.Random;
 
-/**
- * Created by quentinlautischer on 2015-09-09.
- */
 public class ReactionTimerFragment extends Fragment{
 
     private Boolean awaitingClick = false;
     private Timer reactionTimer;
 
     MainActivity root;
+    View rootView;
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-            View rootView = inflater.inflate(R.layout.reaction_timer_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.reaction_timer_fragment, container, false);
 
-            root = (MainActivity) getActivity();
-            reactionTimer = new Timer();
+        root = (MainActivity) getActivity();
+        reactionTimer = new Timer();
 
-            rootView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ReactionTimerClick(view);
-                }
-            });
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReactionTimerClick();
+            }
+        });
 
-            return rootView;
-        }
+        this.rootView = rootView;
 
-    public void ReactionTimerClick(View rootView) {
+        return rootView;
+    }
+
+    public void ReactionTimerClick( ) {
 
         if (!awaitingClick){
             //Start and wait for Reaction
-            rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
-            rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.INVISIBLE);
-            rootView.findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
+            afterClickView();
 
             Random r = new Random();
             int alertDelayTime = r.nextInt(2000) + 10;
@@ -54,8 +52,7 @@ public class ReactionTimerFragment extends Fragment{
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    getView().findViewById(R.id.reactionTimerAlert).setVisibility(View.VISIBLE);
-                    getView().findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#CC1234"));
+                    alertClickView();
                     awaitingClick = true;
                     reactionTimer.start();
                 }
@@ -65,21 +62,12 @@ public class ReactionTimerFragment extends Fragment{
             int time = reactionTimer.stop();
             awaitingClick = false;
 
-            final TextView mTextView = (TextView) rootView.findViewById(R.id.reactionTimerTextView);
+            setReactionInfoOnView(time);
 
-            mTextView.setText("Tap to begin again \n Your time was: ");
-            mTextView.append(String.valueOf(time) + "ms \n");
-            if(root.statsController.getMinTimeForLast(Integer.MAX_VALUE) > time) {
-                mTextView.append("NEW RECORD!!");
-            }
+            root.statsModel.addReactionTime(time);
 
-            root.statsController.addReactionTime(time);
-
-            rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
-            rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
-            rootView.findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
+            alertFinishedView();
         }
-
     }
 
     public class Timer {
@@ -92,6 +80,33 @@ public class ReactionTimerFragment extends Fragment{
         public int stop() {
             return (int) ((System.currentTimeMillis() - this.startTime));
         }
+    }
+
+    private void afterClickView(){
+        rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
+        rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.INVISIBLE);
+        rootView.findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
+    }
+
+    private void alertClickView(){
+        getView().findViewById(R.id.reactionTimerAlert).setVisibility(View.VISIBLE);
+        getView().findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#CC1234"));
+    }
+
+    private void setReactionInfoOnView(int time){
+        final TextView mTextView = (TextView) rootView.findViewById(R.id.reactionTimerTextView);
+
+        mTextView.setText("Tap to begin again \n Your time was: ");
+        mTextView.append(String.valueOf(time) + "ms \n");
+        if(root.statsModel.getMinTimeForLast(Integer.MAX_VALUE) > time) {
+            mTextView.append("NEW RECORD!!");
+        }
+    }
+
+    private void alertFinishedView(){
+        rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
+        rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
+        rootView.findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
     }
 
 }

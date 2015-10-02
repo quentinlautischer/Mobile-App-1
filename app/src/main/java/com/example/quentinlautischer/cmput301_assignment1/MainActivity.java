@@ -21,7 +21,7 @@ public class MainActivity extends FragmentActivity implements
     public TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
 
-    public StatsController statsController;
+    public StatsModel statsModel;
 
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
 
@@ -39,8 +39,8 @@ public class MainActivity extends FragmentActivity implements
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        statsController = new StatsController(this);
-        statsController.loadData();
+        statsModel = new StatsModel(this);
+        statsModel.loadData();
 
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)

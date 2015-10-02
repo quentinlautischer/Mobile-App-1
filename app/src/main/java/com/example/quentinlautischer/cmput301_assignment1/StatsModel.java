@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by quentinlautischer on 2015-09-11.
  */
-public class StatsController extends Application {
+public class StatsModel extends Application {
 
     ArrayList<Integer> reactionTimes;
     HashMap<String, Integer> buzzerClicks;
@@ -36,7 +36,7 @@ public class StatsController extends Application {
                             "b3P_p1","b3P_p2","b3P_p3",
                             "b4P_p1","b4P_p2","b4P_p3","b4P_p4"};
 
-public StatsController(MainActivity root){
+public StatsModel(MainActivity root){
 
         sharedPref = root.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();

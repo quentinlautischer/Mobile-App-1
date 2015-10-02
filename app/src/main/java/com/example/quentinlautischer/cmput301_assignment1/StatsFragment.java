@@ -51,8 +51,8 @@ public class StatsFragment extends Fragment{
                 emailIntent.setType("*/*");
 
 
-//                String statsReactionData = root.statsController.getStatsReactionDataPrinted();
-//                String statsBuzzerData = root.statsController.getStatsBuzzerDataPrinted();
+//                String statsReactionData = root.statsModel.getStatsReactionDataPrinted();
+//                String statsBuzzerData = root.statsModel.getStatsBuzzerDataPrinted();
 //                emailIntent.putExtra(Intent.EXTRA_TEXT, statsReactionData + statsBuzzerData);
 //                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Stats Data from App");
                 if (emailIntent.resolveActivity(root.getPackageManager()) != null) {
@@ -74,7 +74,7 @@ public class StatsFragment extends Fragment{
 
                 alert.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        root.statsController.clearStats();
+                        root.statsModel.clearStats();
                         initStats();
                     }
                 });
@@ -92,24 +92,24 @@ public class StatsFragment extends Fragment{
     }
 
     private void initStats() {
-        setStatTableEntity("reactMinTime10", root.statsController.getMinTimeForLast(10));
-        setStatTableEntity("reactMinTime100", root.statsController.getMinTimeForLast(100));
-        setStatTableEntity("reactMinTimeAll", root.statsController.getMinTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactMinTime10", root.statsModel.getMinTimeForLast(10));
+        setStatTableEntity("reactMinTime100", root.statsModel.getMinTimeForLast(100));
+        setStatTableEntity("reactMinTimeAll", root.statsModel.getMinTimeForLast(Integer.MAX_VALUE));
 
-        setStatTableEntity("reactMaxTime10", root.statsController.getMaxTimeForLast(10));
-        setStatTableEntity("reactMaxTime100", root.statsController.getMaxTimeForLast(100));
-        setStatTableEntity("reactMaxTimeAll", root.statsController.getMaxTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactMaxTime10", root.statsModel.getMaxTimeForLast(10));
+        setStatTableEntity("reactMaxTime100", root.statsModel.getMaxTimeForLast(100));
+        setStatTableEntity("reactMaxTimeAll", root.statsModel.getMaxTimeForLast(Integer.MAX_VALUE));
 
-        setStatTableEntity("reactAvgTime10", root.statsController.getAvgTimeForLast(10));
-        setStatTableEntity("reactAvgTime100", root.statsController.getAvgTimeForLast(100));
-        setStatTableEntity("reactAvgTimeAll", root.statsController.getAvgTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactAvgTime10", root.statsModel.getAvgTimeForLast(10));
+        setStatTableEntity("reactAvgTime100", root.statsModel.getAvgTimeForLast(100));
+        setStatTableEntity("reactAvgTimeAll", root.statsModel.getAvgTimeForLast(Integer.MAX_VALUE));
 
-        setStatTableEntity("reactMedTime10", root.statsController.getMedTimeForLast(10));
-        setStatTableEntity("reactMedTime100", root.statsController.getMedTimeForLast(100));
-        setStatTableEntity("reactMedTimeAll", root.statsController.getMedTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactMedTime10", root.statsModel.getMedTimeForLast(10));
+        setStatTableEntity("reactMedTime100", root.statsModel.getMedTimeForLast(100));
+        setStatTableEntity("reactMedTimeAll", root.statsModel.getMedTimeForLast(Integer.MAX_VALUE));
 
         for(String key: buzzerStatFields){
-            setStatTableEntity(key, root.statsController.getBuzzerClicks(key));
+            setStatTableEntity(key, root.statsModel.getBuzzerClicks(key));
         }
     }
 
