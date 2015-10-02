@@ -1,5 +1,6 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,24 +26,37 @@ import java.util.List;
 /**
  * Created by quentinlautischer on 2015-09-11.
  */
-public class StatsModel extends Application {
+public class StatsModel extends Activity{
+
+    private static StatsModel mInstance = null;
 
     ArrayList<Integer> reactionTimes;
     HashMap<String, Integer> buzzerClicks;
-    SharedPreferences sharedPref;
+    SharedPreferences sharedPref = null;
     SharedPreferences.Editor editor;
 
     String[] buzzerFields = {"b2P_p1","b2P_p2",
                             "b3P_p1","b3P_p2","b3P_p3",
                             "b4P_p1","b4P_p2","b4P_p3","b4P_p4"};
 
-    
-    public StatsModel(MainActivity root){
 
-        sharedPref = root.getPreferences(Context.MODE_PRIVATE);
+    private StatsModel(MainActivity root){
+        sharedPref = root.getPreferences(MODE_PRIVATE);
         editor = sharedPref.edit();
 
         loadData();
+    }
+
+    //https://gist.github.com/Akayh/5566992
+    public static StatsModel getInstance(MainActivity root){
+        if(mInstance == null){
+            mInstance = new StatsModel(root);
+        }
+        return mInstance;
+    }
+
+    public static StatsModel getInstance(){
+        return mInstance;
     }
 
     public String getStatsReactionDataPrinted(){

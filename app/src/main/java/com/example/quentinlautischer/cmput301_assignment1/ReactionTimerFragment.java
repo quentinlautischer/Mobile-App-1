@@ -37,7 +37,7 @@ public class ReactionTimerFragment extends Fragment{
         return rootView;
     }
 
-    public void ReactionTimerClick( ) {
+    public void ReactionTimerClick() {
 
         if (!ctrlr.getAwaitingClick()){
             //Start and wait for Reaction
@@ -80,7 +80,7 @@ public class ReactionTimerFragment extends Fragment{
 
         mTextView.setText("Tap to begin again \n Your time was: ");
         mTextView.append(String.valueOf(time) + "ms \n");
-        if(root.statsModel.getMinTimeForLast(Integer.MAX_VALUE) > time) {
+        if(ctrlr.getMinTime() > time) {
             mTextView.append("NEW RECORD!!");
         }
     }

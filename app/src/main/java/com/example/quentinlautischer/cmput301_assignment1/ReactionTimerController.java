@@ -7,9 +7,11 @@ public class ReactionTimerController {
 
     private Boolean awaitingClick = false;
     public Timer reactionTimer;
+    private StatsModel model;
 
     public ReactionTimerController(){
         reactionTimer = new Timer();
+        model = StatsModel.getInstance();
     }
 
     public Boolean getAwaitingClick() {
@@ -18,6 +20,10 @@ public class ReactionTimerController {
 
     public void setAwaitingClick(Boolean awaitingClick) {
         this.awaitingClick = awaitingClick;
+    }
+
+    public int getMinTime(){
+        return model.getMinTimeForLast(Integer.MAX_VALUE);
     }
 
     public class Timer {
