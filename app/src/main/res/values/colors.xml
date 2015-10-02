@@ -7,4 +7,7 @@
 
     <item name="tableOddLine" type="color">#fff9c4</item>
     <item name="tableEvenLine" type="color">#ffecb3</item>
+
+    <item name="reactionTimerDefaultBG" type="color">#5edf74</item>
+    <item name="reactionTimerAlertBG" type="color">#CC1234</item>
 </resources>

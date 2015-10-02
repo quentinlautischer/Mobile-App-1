@@ -12,20 +12,16 @@ import java.util.Random;
 
 public class ReactionTimerFragment extends Fragment{
 
-    private Boolean awaitingClick = false;
-    private Timer reactionTimer;
-
     MainActivity root;
     View rootView;
+
+    private ReactionTimerController ctrlr;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.reaction_timer_fragment, container, false);
-
-        root = (MainActivity) getActivity();
-        reactionTimer = new Timer();
 
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,13 +31,15 @@ public class ReactionTimerFragment extends Fragment{
         });
 
         this.rootView = rootView;
+        root = (MainActivity) getActivity();
+        ctrlr = new ReactionTimerController();
 
         return rootView;
     }
 
     public void ReactionTimerClick( ) {
 
-        if (!awaitingClick){
+        if (!ctrlr.getAwaitingClick()){
             //Start and wait for Reaction
             afterClickView();
 
@@ -53,44 +51,28 @@ public class ReactionTimerFragment extends Fragment{
                 @Override
                 public void run() {
                     alertClickView();
-                    awaitingClick = true;
-                    reactionTimer.start();
+                    ctrlr.setAwaitingClick(Boolean.TRUE);
+                    ctrlr.reactionTimer.start();
                 }
             }, alertDelayTime);
         } else {
             //Reaction
-            int time = reactionTimer.stop();
-            awaitingClick = false;
-
+            int time = ctrlr.reactionTimer.stop();
+            ctrlr.setAwaitingClick(Boolean.FALSE);
             setReactionInfoOnView(time);
-
-            root.statsModel.addReactionTime(time);
-
             alertFinishedView();
         }
     }
 
-    public class Timer {
-        private int startTime = 0;
-
-        public void start() {
-            this.startTime = (int) System.currentTimeMillis();
-        }
-
-        public int stop() {
-            return (int) ((System.currentTimeMillis() - this.startTime));
-        }
-    }
-
     private void afterClickView(){
-        rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
+        rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(getResources().getColor(R.color.reactionTimerDefaultBG));
         rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.INVISIBLE);
         rootView.findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
     }
 
     private void alertClickView(){
         getView().findViewById(R.id.reactionTimerAlert).setVisibility(View.VISIBLE);
-        getView().findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#CC1234"));
+        getView().findViewById(R.id.reactionTimerRoot).setBackgroundColor(getResources().getColor(R.color.reactionTimerAlertBG));
     }
 
     private void setReactionInfoOnView(int time){
@@ -104,7 +86,7 @@ public class ReactionTimerFragment extends Fragment{
     }
 
     private void alertFinishedView(){
-        rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(Color.parseColor("#5edf74"));
+        rootView.findViewById(R.id.reactionTimerRoot).setBackgroundColor(getResources().getColor(R.color.reactionTimerDefaultBG));
         rootView.findViewById(R.id.reactionTimerTextView).setVisibility(View.VISIBLE);
         rootView.findViewById(R.id.reactionTimerAlert).setVisibility(View.INVISIBLE);
     }

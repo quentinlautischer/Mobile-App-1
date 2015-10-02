@@ -36,7 +36,8 @@ public class StatsModel extends Application {
                             "b3P_p1","b3P_p2","b3P_p3",
                             "b4P_p1","b4P_p2","b4P_p3","b4P_p4"};
 
-public StatsModel(MainActivity root){
+    
+    public StatsModel(MainActivity root){
 
         sharedPref = root.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
