@@ -3,18 +3,14 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by quentinlautischer on 2015-09-09.
@@ -34,7 +30,7 @@ public class StatsFragment extends Fragment{
     public void setMenuVisibility(final boolean visible){
         super.setMenuVisibility(visible);
         if (visible && isResumed()){
-            initStats();
+            refreshStatsView();
         }
     }
 
@@ -47,7 +43,7 @@ public class StatsFragment extends Fragment{
         this.root = (MainActivity) getActivity();
         this.rootView = rootView;
         model = StatsModel.getInstance();
-        initStats();
+        refreshStatsView();
 
         rootView.findViewById(R.id.emailStats).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,22 +58,18 @@ public class StatsFragment extends Fragment{
             @Override
             public void onClick(View view) {
 
-                final View thisView = view;
                 AlertDialog.Builder alert = new AlertDialog.Builder(root);
                 alert.setTitle("Are you sure you want to clear stats?");
 
                 alert.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         model.clearStats();
-                        initStats();
+                        refreshStatsView();
                     }
                 });
 
                 alert.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                            }
-                        });
+                        new DialogInterface.OnClickListener() {public void onClick(DialogInterface dialog, int whichButton) {}});
                 alert.show();
             }
         });
@@ -85,7 +77,7 @@ public class StatsFragment extends Fragment{
         return rootView;
     }
 
-    private void initStats() {
+    private void refreshStatsView() {
         setStatTableEntity("reactMinTime10", model.getMinTimeForLast(10));
         setStatTableEntity("reactMinTime100", model.getMinTimeForLast(100));
         setStatTableEntity("reactMinTimeAll", model.getMinTimeForLast(Integer.MAX_VALUE));
