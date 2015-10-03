@@ -9,12 +9,14 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -26,6 +28,18 @@ public class MainActivity extends FragmentActivity implements
     public StatsModel statsModel;
 
     private String[] tabs = { "Reaction Time", "Buzzer Game", "Stats" };
+
+    public void startEmail(){
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("*/*");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Reaction/Buzzer Stats");
+        intent.putExtra(Intent.EXTRA_TEXT,statsModel.getStatsDataPrinted());
+        try {
+            startActivity(intent);
+        } catch (android.content.ActivityNotFoundException e){
+            Toast.makeText(this, "There is no email client Installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by quentinlautischer on 2015-09-11.
  */
-public class StatsModel extends Activity{
+public class StatsModel extends Application{
 
     private static StatsModel mInstance = null;
 
@@ -57,6 +57,16 @@ public class StatsModel extends Activity{
 
     public static StatsModel getInstance(){
         return mInstance;
+    }
+
+    public String getStatsDataPrinted() {
+        String printedData = "Json Formatted Data \n\n Array of Reaction Times: \n "
+                + getStatsReactionDataPrinted() + "\n\n HashMap of Buzzer Scores: \n";
+        for(String i: buzzerFields){
+            printedData = printedData + (i.replace("b", "") + ": " + buzzerClicks.get(i).toString() + "\n");
+        }
+
+        return printedData;
     }
 
     public String getStatsReactionDataPrinted(){

@@ -6,12 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by quentinlautischer on 2015-09-09.
@@ -21,6 +24,7 @@ public class StatsFragment extends Fragment{
     public SharedPreferences sharedPref;
     private MainActivity root;
     private View rootView;
+    private StatsModel model;
 
     private String[] buzzerStatFields = { "b2P_p1", "b2P_p2",
                                     "b3P_p1", "b3P_p2", "b3P_p3",
@@ -42,23 +46,13 @@ public class StatsFragment extends Fragment{
         this.sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         this.root = (MainActivity) getActivity();
         this.rootView = rootView;
+        model = StatsModel.getInstance();
         initStats();
 
         rootView.findViewById(R.id.emailStats).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setType("*/*");
-
-
-//                String statsReactionData = root.statsModel.getStatsReactionDataPrinted();
-//                String statsBuzzerData = root.statsModel.getStatsBuzzerDataPrinted();
-//                emailIntent.putExtra(Intent.EXTRA_TEXT, statsReactionData + statsBuzzerData);
-//                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Stats Data from App");
-                if (emailIntent.resolveActivity(root.getPackageManager()) != null) {
-                    startActivity(emailIntent);
-                }
-
+                root.startEmail();
             }
         });
 
@@ -74,7 +68,7 @@ public class StatsFragment extends Fragment{
 
                 alert.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        root.statsModel.clearStats();
+                        model.clearStats();
                         initStats();
                     }
                 });
@@ -92,24 +86,24 @@ public class StatsFragment extends Fragment{
     }
 
     private void initStats() {
-        setStatTableEntity("reactMinTime10", root.statsModel.getMinTimeForLast(10));
-        setStatTableEntity("reactMinTime100", root.statsModel.getMinTimeForLast(100));
-        setStatTableEntity("reactMinTimeAll", root.statsModel.getMinTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactMinTime10", model.getMinTimeForLast(10));
+        setStatTableEntity("reactMinTime100", model.getMinTimeForLast(100));
+        setStatTableEntity("reactMinTimeAll", model.getMinTimeForLast(Integer.MAX_VALUE));
 
-        setStatTableEntity("reactMaxTime10", root.statsModel.getMaxTimeForLast(10));
-        setStatTableEntity("reactMaxTime100", root.statsModel.getMaxTimeForLast(100));
-        setStatTableEntity("reactMaxTimeAll", root.statsModel.getMaxTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactMaxTime10", model.getMaxTimeForLast(10));
+        setStatTableEntity("reactMaxTime100", model.getMaxTimeForLast(100));
+        setStatTableEntity("reactMaxTimeAll", model.getMaxTimeForLast(Integer.MAX_VALUE));
 
-        setStatTableEntity("reactAvgTime10", root.statsModel.getAvgTimeForLast(10));
-        setStatTableEntity("reactAvgTime100", root.statsModel.getAvgTimeForLast(100));
-        setStatTableEntity("reactAvgTimeAll", root.statsModel.getAvgTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactAvgTime10", model.getAvgTimeForLast(10));
+        setStatTableEntity("reactAvgTime100", model.getAvgTimeForLast(100));
+        setStatTableEntity("reactAvgTimeAll", model.getAvgTimeForLast(Integer.MAX_VALUE));
 
-        setStatTableEntity("reactMedTime10", root.statsModel.getMedTimeForLast(10));
-        setStatTableEntity("reactMedTime100", root.statsModel.getMedTimeForLast(100));
-        setStatTableEntity("reactMedTimeAll", root.statsModel.getMedTimeForLast(Integer.MAX_VALUE));
+        setStatTableEntity("reactMedTime10", model.getMedTimeForLast(10));
+        setStatTableEntity("reactMedTime100", model.getMedTimeForLast(100));
+        setStatTableEntity("reactMedTimeAll", model.getMedTimeForLast(Integer.MAX_VALUE));
 
         for(String key: buzzerStatFields){
-            setStatTableEntity(key, root.statsModel.getBuzzerClicks(key));
+            setStatTableEntity(key, model.getBuzzerClicks(key));
         }
     }
 

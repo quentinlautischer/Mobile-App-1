@@ -7,6 +7,13 @@
     <string name="first">First</string>
     <string name="last">Last</string>
 
+
+    <string name="startReactionTimer">startReactionTimer</string>
+    <string name="tooSoonReactionTimer">tooSoonReactionTimer</string>
+    <string name="alertReactionTimer">alertReactionTimer</string>
+    <string name="resetReactionTimer">resetReactionTimer</string>
+    <string name="finishReactionTimer">finishReactionTimer</string>
+
     <string name="reactionTimesData">reactionTimesData</string>
 
     <string name="reactMinTime10">reactionStatsTableR2C2</string>
