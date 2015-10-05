@@ -19,6 +19,8 @@ import java.util.Observer;
 
 /**
  * Created by quentinlautischer on 2015-09-09.
+ * Used
+ * //http://stackoverflow.com/questions/1851633/how-to-add-a-button-dynamically-in-android
  */
 public class BuzzerGameFragment extends Fragment implements Observer {
 
@@ -75,7 +77,6 @@ public class BuzzerGameFragment extends Fragment implements Observer {
     public void update(Observable observable, Object data){}
 
     public void buzzerButtonView(){
-        //http://stackoverflow.com/questions/1851633/how-to-add-a-button-dynamically-in-android
         final LinearLayout linear = (LinearLayout) rootView.findViewById(R.id.buzzer_button_layout);
         for(int i=0; i < numOfPlayers; i++){
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
