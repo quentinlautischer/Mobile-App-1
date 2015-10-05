@@ -18,7 +18,7 @@ limitations under the License.
 
 ## Demo Video
 
-https://youtu.be/nKck4_13tOE
+https://youtu.be/nKck4_13tOE or a .flv can be found in the doc folder.
 
 ## Citations
 Dynamic Buttons for the Buzzer Fragment http://stackoverflow.com/questions/1851633/how-to-add-a-button-dynamically-in-android
