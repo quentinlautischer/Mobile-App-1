@@ -2,13 +2,11 @@ package com.example.quentinlautischer.cmput301_assignment1;
 
 
 import android.os.Handler;
-import android.util.Log;
-
 import java.util.Observable;
 import java.util.Random;
 
 /**
- * Created by lautisch on 10/2/15.
+ * Created by quentinlautischer on 10/2/15.
  */
 public class ReactionTimerController extends Observable{
 
@@ -31,7 +29,6 @@ public class ReactionTimerController extends Observable{
         alertRunner = new Runnable() {
             @Override
             public void run() {
-                Log.d("QQQ", "reactionAlertTriggered");
                 setReactionData(R.string.alertReactionTimer);
                 setAwaitingAlert(Boolean.FALSE);
                 reactionTimer.start();
@@ -56,7 +53,6 @@ public class ReactionTimerController extends Observable{
 
             Random r = new Random();
             int alertDelayTime = r.nextInt(2000) + 10;
-
             handler.postDelayed(alertRunner, alertDelayTime);
         } else if (!getAwaitingAlert()) {
             //Reaction

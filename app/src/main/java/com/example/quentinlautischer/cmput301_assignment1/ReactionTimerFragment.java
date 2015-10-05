@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Created by quentinlautischer on 2015-09-09.
+ */
 
 public class ReactionTimerFragment extends Fragment implements Observer{
 

@@ -19,7 +19,7 @@ import java.util.Observer;
 
 /**
  * Created by quentinlautischer on 2015-09-09.
- * Used
+ * Used for generating buttons in the dynamic buttons in the buzzerButtonView()
  * //http://stackoverflow.com/questions/1851633/how-to-add-a-button-dynamically-in-android
  */
 public class BuzzerGameFragment extends Fragment implements Observer {

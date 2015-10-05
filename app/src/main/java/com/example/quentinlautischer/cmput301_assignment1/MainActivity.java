@@ -1,6 +1,7 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 /**
  * Created by quentinlautischer on 2015-09-09.
+ * Used for the swipe tabs pattern
  * http://www.androidhive.info/2013/10/android-tab-layout-with-swipeable-views-1/\
  * https://github.com/codepath/android_guides/wiki/Google-Play-Style-Tabs-using-TabLayout
  */
@@ -8,9 +9,7 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -34,7 +33,6 @@ public class MainActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());

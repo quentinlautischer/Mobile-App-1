@@ -3,7 +3,7 @@ package com.example.quentinlautischer.cmput301_assignment1;
 import java.util.Observable;
 
 /**
- * Created by lautisch on 10/2/15.
+ * Created by quentinlautischer on 10/2/15.
  */
 public class BuzzerGameController extends Observable {
 

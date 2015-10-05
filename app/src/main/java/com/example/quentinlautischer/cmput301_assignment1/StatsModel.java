@@ -1,21 +1,9 @@
 package com.example.quentinlautischer.cmput301_assignment1;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +13,8 @@ import java.util.List;
 
 /**
  * Created by quentinlautischer on 2015-09-11.
+ * Used for Singleton implementation
+ * //https://gist.github.com/Akayh/5566992
  */
 public class StatsModel extends Application{
 
@@ -38,7 +28,6 @@ public class StatsModel extends Application{
     String[] buzzerFields = {"b2P_p1","b2P_p2",
                             "b3P_p1","b3P_p2","b3P_p3",
                             "b4P_p1","b4P_p2","b4P_p3","b4P_p4"};
-
 
     private StatsModel(MainActivity root){
         sharedPref = root.getPreferences(MODE_PRIVATE);
@@ -67,17 +56,6 @@ public class StatsModel extends Application{
         }
 
         return printedData;
-    }
-
-    public String getStatsReactionDataPrinted(){
-        Gson gson = new Gson();
-        String data = gson.toJson(reactionTimes);
-        return data;
-    }
-    public String getStatsBuzzerDataPrinted(){
-        Gson gson = new Gson();
-        String data = gson.toJson(buzzerClicks);
-        return data;
     }
 
     public void loadData(){
@@ -116,25 +94,18 @@ public class StatsModel extends Application{
 
     //Buzzer Game Methods
 
+    public String getStatsBuzzerDataPrinted(){
+        Gson gson = new Gson();
+        String data = gson.toJson(buzzerClicks);
+        return data;
+    }
+
     private void clearBuzzerClicks(){
         buzzerClicks = new HashMap<String, Integer>();
         for (String entry: buzzerFields) {
             buzzerClicks.put(entry, 0);
         }
     }
-
-//    private void loadBuzzerClicks(){
-//        buzzerClicks = new HashMap<String, Integer>();
-//        buzzerClicks.put("b2P_p1", 1);
-//        buzzerClicks.put("b2P_p2", 1);
-//        buzzerClicks.put("b3P_p1", 2);
-//        buzzerClicks.put("b3P_p2", 1);
-//        buzzerClicks.put("b3P_p3", 1);
-//        buzzerClicks.put("b4P_p1", 1);
-//        buzzerClicks.put("b4P_p2", 5);
-//        buzzerClicks.put("b4P_p3", 1);
-//        buzzerClicks.put("b4P_p4", 1);
-//    }
 
     public void addBuzzerClick(String gameMode, String player){
         String key = "b" + gameMode + "_" + player;
@@ -152,19 +123,11 @@ public class StatsModel extends Application{
 
     //Reaction Timer Methods
 
-//    private void loadReactionTimes(){
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(100);
-//        addReactionTime(1000);
-//    }
+    public String getStatsReactionDataPrinted(){
+        Gson gson = new Gson();
+        String data = gson.toJson(reactionTimes);
+        return data;
+    }
 
     public void addReactionTime(Integer time){
         this.reactionTimes.add(0, time);
@@ -241,7 +204,6 @@ public class StatsModel extends Application{
             }
             xTimes = reactionTimes.size();
         }
-
 
         List<Integer> list = reactionTimes.subList(0, xTimes);
         Collections.sort(list);
